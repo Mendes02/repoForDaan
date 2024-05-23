@@ -1,0 +1,86 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id "org.sonarqube" version "4.2.1.3168"
+    id "jacoco"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required= true
+        csv.required= false
+        html.required= true
+    }
+}
+
+group = 'fontys.sem3'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    testImplementation 'junit:junit:4.13.1'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.projectlombok:lombok:1.18.26'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'javax.transaction:javax.transaction-api:1.3'
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+    implementation 'org.hibernate:hibernate-core:6.4.0.CR1'
+
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
+
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+}
+
+sonar {
+    properties {
+        property "sonar.coverage.exclusions", "fontys/sem3/school/config/**, fontys/sem3/school/controller/**, fontys/sem3/school/persistence/**"
+        property "sonar.projectKey", "FIAS"
+        property "sonar.projectName", "S3 Individual Project"
+        property "sonar.qualitygate.wait", false
+        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/test/jacocoTestReport.xml"
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
