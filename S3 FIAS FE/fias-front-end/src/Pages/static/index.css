@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Roboto', sans-serif;
+}
+
+.video-games-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px; /* Adjust top margin as needed */
+}
+
+.video-game-card {
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  color: white; /* White text color */
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+  text-align: center; /* Center the text */
+}
+
+.video-game-card:hover {
+  transform: scale(1.05); /* Slightly enlarge card on hover */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.video-game-card h2 {
+  margin: 0 0 10px 0; /* Add space below the title */
+}
+
+.video-game-card p {
+  margin: 5px 0; /* Uniform margin for paragraphs */
+}
+
